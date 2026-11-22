@@ -1,0 +1,13 @@
+#!/bin/sh
+# cc-rs passes a Rust target triple. Zig wants arm-linux-musleabihf.
+args=
+for arg in "$@"; do
+    case "$arg" in
+        --target=*|-target|-no-pie)
+            ;;
+        *)
+            args="$args \"$arg\""
+            ;;
+    esac
+done
+eval exec "$HOME/.local/opt/zig/zig" cc -target arm-linux-musleabihf $args -pie

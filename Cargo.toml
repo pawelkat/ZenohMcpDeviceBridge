@@ -1,0 +1,21 @@
+[package]
+name = "zenoh-mcp-device-bridge"
+version = "0.1.0"
+edition = "2021"
+description = "Zenoh MCP Device Bridge. Zenoh is the wiring. MCP is the front door."
+
+[[bin]]
+name = "zenoh-mcp-device-bridge"
+path = "src/main.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "net", "io-util", "sync"] }
+toml = "0.8"
+zenoh = "=1.10.2"
+
+[profile.release]
+lto = false
+codegen-units = 16
+opt-level = 3

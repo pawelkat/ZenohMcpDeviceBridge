@@ -1,0 +1,27 @@
+# Deployed on note4c. The ESP32 keeps its own liveliness token.
+# This process answers manifest and call keys for the scripted devices below.
+connect = "tcp/127.0.0.1:7447"
+mcp_listen = "0.0.0.0:8077"
+
+[[device]]
+id = "towerx-power"
+title = "TowerX power"
+fw = "script"
+state = ["power"]
+command = ["sh", "/data/data/com.termux/files/home/towerx"]
+
+[[device.tool]]
+name = "status"
+description = "Relay pins, cooldown, and board IP. Does not pulse."
+args = ["status"]
+
+[[device.tool]]
+name = "power_on"
+description = "Tap the TowerX power button for 500 ms."
+args = ["on"]
+
+[[device.tool]]
+name = "power_off"
+description = "Hold the TowerX power button for 6 s. Requires confirm=true."
+args = ["off", "yes"]
+confirm = true
